@@ -26,7 +26,6 @@ def experiment(epsilon, delta, verbose=False):
     num_flips = 0
     thetas = np.random.rand(NUM_COINS)
     counts = np.zeros(NUM_COINS)
-    deltas = []
     while emp_delta > delta:
         flips = [1 if random.random() < theta else 0 for theta in thetas]
         num_flips += 1
@@ -34,7 +33,6 @@ def experiment(epsilon, delta, verbose=False):
         guesses = counts / num_flips
         diffs = np.abs(guesses - thetas)
         emp_delta = len(np.where(diffs > epsilon)[0]) / NUM_COINS
-        deltas.append(emp_delta)
         if verbose:
             print('{}\t{}'.format(num_flips, emp_delta))
     return num_flips
